@@ -118,18 +118,19 @@ const area = triangle(21, 5);
 
 ---
 
-もし、このようなコードを書いてしまった場合。
+
 ```JavaScript
 // 三角形の面積を求める
 function triangle(bottom, height) {
   return bottom * height / 2;
 }
-
-const area = triangle("21", 5);
+const input = prompt("底辺を入力してください");
+const area = triangle(input, 5);
 ```
-
-引数`bottom`には文字列が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生します。
+もし、このようなコードを書いてしまった場合。
+引数`bottom`には文字列<sup>[1](#note1)</sup>が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生します。
 このようなエラーを防ぐには、常に型を意識をしなければなりません。
+<small> *1 厳密には違いますが今回は便宜上`string`として説明します。 </small>
 
 ---
 
