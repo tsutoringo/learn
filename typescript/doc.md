@@ -128,9 +128,9 @@ const input = prompt("底辺を入力してください");
 const area = triangle(input, 5);
 ```
 もし、このようなコードを書いてしまった場合。
-引数`bottom`には文字列<sup>[1](#note1)</sup>が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生します。
+引数`bottom`には文字列<sup>[1](#bad-type)</sup>が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生します。
 このようなエラーを防ぐには、常に型を意識をしなければなりません。
-<small> *1 厳密には違いますが今回は便宜上`string`として説明します。 </small>
+<small id="bad-type"> *1 厳密には違いますが今回は便宜上`string`として説明します。 </small>
 
 ---
 
