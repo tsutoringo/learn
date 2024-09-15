@@ -1,5 +1,5 @@
 // 三角形の面積を求める
-function triangle(bottom, height) {
+function triangle(bottom: number, height: number) {
     return bottom * height / 2;
 }
 
