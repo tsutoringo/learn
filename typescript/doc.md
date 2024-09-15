@@ -172,7 +172,11 @@ TypeScriptでは
 
 ---
 
-型とJSの問題点がわかったところで今までのコードをTypeScriptに変換しましょう。
+型とJSの問題点がわかったところで今までのコードをTypeScriptに書き換えていきましょう。
+
+次のURLからTypeScriptを試せるページに飛べます
+[TypeScript Playground](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgBpQACw7kW40gEpQAb2yhQdDqXx0afAcNAAqCVJmlQYAEwBubAF9sxagGczuwUNABeUAAc6wn1IuACJAVL1ALvjkQFNFQGylQHUGQDMGQHkGQAMGQFUGQBEGQCAGYLkbR0IXUEZ1Ri9aBmZ2bjdhMQBWPOwgA)
+
 
 ---
 
