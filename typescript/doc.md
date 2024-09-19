@@ -21,6 +21,14 @@ style: |
   - 型についての知識・オブジェクト指向
 
 ---
+
+# はじめに
+このスライドはまず型についての簡単な知識と、
+なぜJavaScriptを使わずにTypeScriptを使うという選択肢を選ぶかを学びます。
+
+
+
+---
 <!-- _class: lead -->
 
 みんな嫌いな
@@ -174,11 +182,17 @@ TypeScriptでは
 
 型とJSの問題点がわかったところで今までのコードをTypeScriptに書き換えていきましょう。
 
-次のURLからTypeScriptを試せるページに飛べます
+次のURLからTypeScriptを試せるページに飛びます。
 [TypeScript Playground](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgBpQACw7kW40gEpQAb2yhQdDqXx0afAcNAAqCVJmlQYAEwBubAF9sxagGczuwUNABeUAAc6wn1IuACJAVL1ALvjkQFNFQGylQHUGQDMGQHkGQAMGQFUGQBEGQCAGYLkbR0IXUEZ1Ri9aBmZ2bjdhMQBWPOwgA)
 
+先程の問題のあるJavaScriptのコードをTypeScriptで書き直して見ましょう。
+以下の差分を参考にコードを修正してください。
+[Github - Compare](https://github.com/tsutoringo/learn/compare/2a8d3bf7..2de3192d)
 
 ---
+
+
+
 
 <!-- _class: lead -->
 # こっから下は未完成
