@@ -22,11 +22,16 @@ style: |
 
 ---
 
+---
+
 # はじめに
 このスライドはまず型についての簡単な知識と、
-なぜJavaScriptを使わずにTypeScriptを使うという選択肢を選ぶかを学びます。
+なぜJavaScriptを使わずにTypeScriptを使うのか学びます。
 
-
+## このスライドを読んでいくうえで、大事な心持ち。
+- 型を意識しよう
+- エラーと友達になろう
+- 人間のチェックは信じられない！
 
 ---
 <!-- _class: lead -->
@@ -54,20 +59,20 @@ TypeScriptは静的型付け言語
 
 ---
 
-JavaScriptはあまり「**型**」をあまり意識**せず**にコードを書くことができます。
-逆にTypeScriptは型を**意識**し、**明示的**に書く必要性があります。
+動的型付け言語である、JavaScriptやPythonはあまり「**型**」を明示的に書かずコードを書くことができます。
+逆に静的型付け言語にTypeScriptやJavaは型を**意識**し、**明示的**に書く必要性があります。
 
 具体にそれがどういうことなのかという話の前に、まず「**型**」が何なのかを勉強していきましょう。
 
 ---
 
 <!-- _class: lead -->
-## 1. What's "Type"
+## 1. What's Type
 型って何
 
 ---
 
-1. What's "Type" では型がなにか と、型を意識する重要性について考えます。
+1. What's Type では型がなにか と、型を意識する重要性について考えます。
 
 型はJavaScriptにかかわらず大抵の言語でも必要となる考え方になります。
 
@@ -150,9 +155,7 @@ TypeScriptでは
 
 2. In TypeScript では、JSではだめな理由とTypeScriptに書き換えたときのコードを比較していきます。
 
-型を意識するだけでエラーを防げるなら意識すればいいじゃん。と思った方はいますか？
-
-その場合考えを改めてください。
+型を意識するだけでエラーを防げるなら意識すればいいじゃん。と思った方はいませんよね？
 
 コードが1000行、ソースファイルも10個以上のような状況になったときあなたとあなたのチームメイトは、**完璧に型を意識してコードを書くこと**は出来ますでしょうか？
 
@@ -164,9 +167,18 @@ TypeScriptでは
 
 ---
 
+
+---
+<!-- _class: lead -->
+![bg left:40%](image.png)
+
+## そう、出来ません。
+
+---
+
 けれどそれを実現しなければ大量のバグの元になります。
 
-例えばボタンを押したときに先程の`triangle`関数のような呼び方を気づかず行ってしまうと、ボタンを押すまでエラーがわからないの事に加え、必ずしもそのボタンを押してデバックするとは限らないため、更に発見が遅れる可能性が高いです。
+例えばボタンを押したときに先程の`triangle`関数のような呼び方を気づかず行ってしまうと、ボタンを押すまでエラーが発生しない事に加え、必ずしもそのボタンを押してデバックするとは限らないため、更に発見が遅れる可能性が高いです。
 
 そのような事故を防ぐため、我々が型を明示的に書き実行する前にTypeScriptに型があっているか自動的に確認してもらおう！
 というのがTypeScriptです。
@@ -191,77 +203,17 @@ TypeScriptでは
 
 ---
 
+これで`bottom`が`string`型、`triangle`関数の１つ目の引数が`number`型なためTypeScriptが事前にエラーを発生させます。
 
-
-
-<!-- _class: lead -->
-# こっから下は未完成
+このようにJavaScriptは実行して該当箇所が実行するまでエラーがわからないのに比べ、TypeScriptは型の違いをみて実行前に型の不整合を検知することができます。
 
 ---
 
-とこのように具体的より、抽象的に考えます。
+# まとめ
 
-今回は`string`型と`number`型で説明しましたが、他にも型が無数にあります。
-が、今回は
-
----
-
-### Why TypeScript
-実はTypeScriptはJavaScriptのように直接実行出来ません。  
-**ブラウザで実行するにはTypeScriptをJavaScriptに変換して実行します。**
-
-「えぇ〜〜じゃあわざわざTypeScript使う必要はないじゃん！」と、そう思いますよね。
-しかし今の時代、JavaScriptで開発をすることはほとんどありません。
-
-じゃあ何でそんな面倒なことしてTypeScriptを使うのか。
+- JavaScriptは型を実行時に決まるので気づかない可能性がある
+  - これを動的型付け言語という
+- TypeScriptは人が型を明示し、事前にすべて確認をするためしょうもないミスが減る
+  - これを静的型付け言語という
 
 ---
-
-## 2. Learn from example.
-実際に、JavaScriptとTypeScriptのコードを見比べて見ましょう。
-
-ここで三角形の面積を求める関数について見てましょう。
-```JavaScript
-function circle(bottom, height) {
-  return bottom * height / 2;
-}
-
-const circleArea1 = circle(10, 20);
-const circleArea2 = circle(2, 100);
-const circleArea3 = circle(50, "10");
-const circleArea4 = circle(50);
-```
-
----
-
-はい。おわかりの通り、**このコードは実行するとエラー**が起きます。  
-はい実行するとです。実行するまでエラーが出てきません。  
-ではTypeScriptはどうか。
-```TypeScript
-function circle(bottom: number, height: number): number {
-  return bottom * height / 2;
-}
-const circleArea1 = circle(10, 20);
-const circleArea2 = circle(2, 100);
-const circleArea3 = circle(50, "10");
-const circleArea4 = circle(50);
-```
-↓このURLで実際の挙動を確認
-[TypeScript Playground](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABBGAnCAbApgCgEZxRRwC2AXImCCXlqgDSIAWWMA5k1BVTXQJTdqtVIgDeAKESJUWKCFRICRUogBUzVhyiIA9IgBMAbnEBfceIgIAztpTpsAQRkBDAIyIAvMjSZcrgAyM+v58xpZgNt72WE5YzvqeUb44+owBIWHWtj6OLgDMiXbJAKyBiABEAeWhFllJuXEALIU5uKU1QA)
-実際に実行する前のコードを書くタイミングでエラーが発生します。
-
----
-
-このコードがエラーを吐く理由は「型」について意識していないと理解できないです。
-
-ですので一度基礎知識の型について最初から学習していきましょう。
-
----
-<!-- _class: lead -->
-
-## 3. What's good about it.
-じゃあそれの何がいいのかっていう話。
-
----
-
-先ほども書いたが
