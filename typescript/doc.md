@@ -7,7 +7,7 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.svg')
 style: |
   :root {
-    font-size: 2.5em;
+    font-size: 2.4em;
   }
 ---
 
@@ -19,8 +19,6 @@ style: |
 - JavaScript を使ったプログラミング経験
 - あれば良い
   - 型についての知識・オブジェクト指向
-
----
 
 ---
 
@@ -60,7 +58,7 @@ TypeScriptは静的型付け言語
 ---
 
 動的型付け言語である、JavaScriptやPythonはあまり「**型**」を明示的に書かずコードを書くことができます。
-逆に静的型付け言語にTypeScriptやJavaは型を**意識**し、**明示的**に書く必要性があります。
+逆に静的型付け言語のTypeScriptやJavaは型を**意識**し、**明示的**に書く必要性があります。
 
 具体にそれがどういうことなのかという話の前に、まず「**型**」が何なのかを勉強していきましょう。
 
@@ -141,9 +139,9 @@ const input = prompt("底辺を入力してください");
 const area = triangle(input, 5);
 ```
 もし、このようなコードを書いてしまった場合。
-引数`bottom`には文字列<sup>[1](#bad-type)</sup>が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生します。
+引数`bottom`には文字列<sup>[1](#bad-type)</sup>が入ってしまい、`string` * `number`の計算を行おうとしてエラーが発生<sup>[2](#bad-error)</sup>します。
 このようなエラーを防ぐには、常に型を意識をしなければなりません。
-<small id="bad-type"> *1 厳密には違いますが今回は便宜上`string`として説明します。 </small>
+<small id="bad-type"> *1 厳密には違いますが今回は便宜上これで説明します</small>
 
 ---
 
@@ -158,15 +156,6 @@ TypeScriptでは
 型を意識するだけでエラーを防げるなら意識すればいいじゃん。と思った方はいませんよね？
 
 コードが1000行、ソースファイルも10個以上のような状況になったときあなたとあなたのチームメイトは、**完璧に型を意識してコードを書くこと**は出来ますでしょうか？
-
----
-<!-- _class: lead -->
-![bg left:40%](image.png)
-
-## そう、出来ません。
-
----
-
 
 ---
 <!-- _class: lead -->
@@ -197,23 +186,59 @@ TypeScriptでは
 次のURLからTypeScriptを試せるページに飛びます。
 [TypeScript Playground](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgBpQACw7kW40gEpQAb2yhQdDqXx0afAcNAAqCVJmlQYAEwBubAF9sxagGczuwUNABeUAAc6wn1IuACJAVL1ALvjkQFNFQGylQHUGQDMGQHkGQAMGQFUGQBEGQCAGYLkbR0IXUEZ1Ri9aBmZ2bjdhMQBWPOwgA)
 
-先程の問題のあるJavaScriptのコードをTypeScriptで書き直して見ましょう。
-以下の差分を参考にコードを修正してください。
-[Github - Compare](https://github.com/tsutoringo/learn/compare/2a8d3bf7..2de3192d)
+このTypeScriptを参考に書き換えて見てください(ﾃﾞｷﾚﾊﾞｺﾋﾟﾍﾟｼﾅｲﾃﾞｶｲﾃﾈ)
+[TypeScript Playground](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgC5QhfEJ4c6AGlAALDuRYLSYiVJkBKDZOl1QAb2yhQdDqXx0afAcNAAqRctWlQYAEwBubAF9sbGJqAGd3O0FRcX0ZUABeUAAHOmFE0i4AIkBUvUAu+ORAU0VAbKVAdQZAMwZAeQZAAwZAVQZAEQZAIAYM7V9gwjDQRgtGPS1DBPomVk5efkj5AFZm7CA)
 
 ---
 
-これで`bottom`が`string`型、`triangle`関数の１つ目の引数が`number`型なためTypeScriptが事前にエラーを発生させます。
+## 型注釈
 
-このようにJavaScriptは実行して該当箇所が実行するまでエラーがわからないのに比べ、TypeScriptは型の違いをみて実行前に型の不整合を検知することができます。
+TypeScript特有の[型注釈](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgC5QhfEJ4c6AGlAALDuRYLSYiVJkBKDZOl1QAb2whQ5i5avWLAPXsObdh-ecvTYJ1+uAUUkAApAGBQcGALKTBgWHhUYAIpNjmdByk+HQ0fALCoABUisqqpKBgAEwA3Gbe5RWggECk2AC+ZZWNTc0WNcTUAM75aYKi4voyoAC8oAAOdMKjpFwARICpeoBd8ciApoqA2UqA6gyAZgyA8gyABgyAqgyAIgyAQAwz2qWeNoDR6oAXNoATiR4VLq4tr941DV7+UT+-f--BQAkpNh2oQuqBGAlGHotIYRvQmKxOLx+L15ABWc6fN4fS42Z62N5Ery47zfAEUykAwAYpEA)をつけました。
+そうすると`const bottom`のところにエラーが出たはずです。
+
+これの解説は[ココ](https://www.typescriptlang.org/play/?#code/PTAEkg5QlyMI31DsGQjdMLJegkhkEI2hAhkNEMAoAZgVwDsBjAFwEsB7Q0UgJ3IENCBzAGwFMAKAI0tNKUAtgC5QhfEJ4c6AGlAALDuRYLSYiVJkBKDZOl1QAb2yhQdDqXx0afAcNAAqRctWlQYAEwBubAF9sbGJqAGd3O0FRcX0ZUABeUAAHOmFE0i4AIkBUvUAu+ORAU0VAbKVAdQZAMwZAeQZAAwZAVQZAEQZAIAYM7V8QMzMAPU6u7u62nv6BwZ7sVrbAIFI2yanJwBRSQABSZNTSWEBuI0AohkASBUB7BgADMIZWUAAfaLY2HcBo9RGwcevZuYfHp+fHysBFBkBLBkBITUAHUx2I4Q7XaaAyXWCARu9AFYMsEA5gwXWCAWDlAABygBfAmEAFQAnokOABlYgMNKAGQZABUMgEuGQA-DMhAF5ugHxXaqAbQYcMFCGFQIwLIw9FpDAl6ExWJxePxIvIAKzNbBAA)に書いてある通りです。
+
+これの解決方法は少し踏み込んだ話をしなければならないので一旦このコードとはおさらばして、別のサンプルコードに移ります。
+
+---
+
+## 型推論
+
+[次のコード](https://www.typescriptlang.org/play/?#code/PTAEgdTR1bUJIZAKlR070OoMgzBkIAMgFX0Dnm1Ar8YTQZAgBgCgAzAVwDsBjAFwEsB7C0AQwBM2AKADwBpQAngEpQAbyKhQAJwCmNMlObdQAakEBuIgF8iRKkwDONaTINkANsYC8rDpwCMAJgAM-AMzOhm9lyevQAEQeAV5EIJIRkgB6MVFhwAB0kZKAKKSAAKQZAAYUZAC2AEYyUpmA0eqA5gyA9gyAVgyAIgyAdgxlgBUMgJcMgD8MgNYMKIDeDIg1REA)に先程のコードを参考に型注釈をつけれるところ全てにつけてみてください。
+
+[型注釈をつけたコード](https://www.typescriptlang.org/play/?#code/PTAEgdTR1bUJIZAKlR070OoMgzBkIAMgFX0Dnm1Ar8YTQZAgBgCgAzAVwDsBjAFwEsB7C0AQwBM2AKADwC5QKZALYAjAKYAnADSgAnv0GjJASgXDxE0AG8ioUBLE0yE5t1ABqOQG4iAXyJEqTAM419Y52QA2NNUs0AvKwcnACMAEwADDIAzJHKNuxcEdGgAERxaQlEIHp5egB6RQU5YPl6gCikgACkNQAGihq1gNHqgOYMgPYMgFYMgCIMgHYMLYAVDICXDIA-DIDWDCiA3gyIXURAA)がこちらになります。
+これ型注釈をわざわざ明示的に書かなくても推論できるんじゃね？
+
+はい、そうです。
+[このように](https://www.typescriptlang.org/play/?#code/PTAEgdTR1bUJIZAKlR070OoMgzBkIAMgFX0Dnm1Ar8YTQZAgBgCgAzAVwDsBjAFwEsB7C0AQwBM2AKADwC5QKZALYAjAKYAnADSgAnv0GjJASlABvIqFAgtuvfoOHdAPU2gJYmmQnNuoANRyA3DqNHAQKRnXJ47+NuA0E8tby1AFFJAAFIo6JjYuOjAZQZAOwZAeH0krCSAA0VxCUzAaPVoCysbFEARBkBohiTAcwZAItTwTPY2TKTAbiNAKIZAEgUk-MB7BmzhXIKiAF8iIiomAGcaczEpsgAbWYBeVg5OAEYAJgAGGQBmXeUnIlC-Px8L69NzjzOwXUi4gB4m+rau3pzJfMArBhqgEhNBoWBbLTLfQa-QAGDIAIhkAtgxEIA)に推論できるところは自動で推論してくれます。
 
 ---
 
 # まとめ
 
-- JavaScriptは型を実行時に決まるので気づかない可能性がある
+- JavaScriptは型を実行時に決まりので気づかない可能性がある
   - これを動的型付け言語という
-- TypeScriptは人が型を明示し、事前にすべて確認をするためしょうもないミスが減る
+- TypeScriptは人が型を明示し、明示された型を確認をTypeScriptがするためしょうもないミスが減る
   - これを静的型付け言語という
+- 動的型付け言語が型を自動で決定してくれるの楽じゃん、という考えは概ね後からしんどくなる
+
+--- 
+
+![bg left:30%](https://media1.tenor.com/m/xuRoGCoV7hAAAAAC/genba-neko-dance.gif)
+
+表にするとこんな感じ
+|            | 型を明示しないとだめか       |
+| ---------- | ---------------------------- |
+| JavaScript | ◯ 実行時に自動で決定        |
+| TypeScript | △ 一部手動で明示が必要      |
+
+|            | 型チェック                   |
+| ---------- | ---------------------------- |
+| JavaScript | ✗ 人がやらないといけない       |
+| TypeScript | ◎ 明示した型で自動でチェック   |
+
 
 ---
+
+# 参考
+- [サバイバルTypeScript](https://typescriptbook.jp/)
